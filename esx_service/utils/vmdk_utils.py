@@ -22,6 +22,7 @@ import re
 import logging
 import fnmatch
 import vmdk_ops
+import auth
 import auth_api
 import log_config
 
@@ -312,11 +313,23 @@ def get_datastore_objects():
 
 def get_datastore_url(datastore_name):
     """ return datastore url for given datastore name """
+
+    # Return default datastore URL for default datastore name
+    if datastore_name == auth.DEFAULT_DS:
+        return auth.DEFAULT_DS_URL
+
+    # Query datastore URL from VIM API
     res = [d.info.url for d in get_datastore_objects() if d.info.name == datastore_name]
     return res[0]
 
 def get_datastore_name(datastore_url):
     """ return datastore name for given datastore url """
+
+    # Return default datastore name for default datastore URL
+    if datastore_url == auth.DEFAULT_DS_URL:
+        return auth.DEFAULT_DS
+
+    # Query datastore name from VIM API
     res = [d.info.name for d in get_datastore_objects() if d.info.url == datastore_url]
     return res[0]
 
