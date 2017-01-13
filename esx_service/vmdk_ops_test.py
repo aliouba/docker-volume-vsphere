@@ -734,7 +734,7 @@ class VmdkTenantTestCase(unittest.TestCase):
                 self.datastore_path = datastore[2]
                 logging.debug("datastore_name=%s datastore_path=%s", self.datastore_name,
                                                                      self.datastore_path)
-                if len(datastores) >= 1:
+                if len(datastores) > 1:
                     datastore1 = datastores[1]
                     self.datastore1_name = datastore1[0]
                     self.datastoer1_path = datastore[2]
